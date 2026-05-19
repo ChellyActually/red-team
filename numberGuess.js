@@ -1,92 +1,146 @@
 
+let secretNumber = Math.floor(Math.random() * 100) + 1;
+
+
 let bestScore = Infinity;
 
-function startGame() {
 
-    let sec_num = Math.floor(Math.random() * 100) + 1;
+let attempts = 0;
 
-    let userGuess = 0;
-    let attempts = 0;
-    let previousGuess = null;
 
-    alert("🎮 New Game Started! Guess the number between 1 and 100");
+let previousGuess = null;
+
+
+const guessInput = document.getElementById("guessInput");
+const submitBtn = document.getElementById("submitBtn");
+const message = document.getElementById("message");
+const attemptCount = document.getElementById("attemptCount");
+const resetBtn = document.getElementById("resetBtn");
+
+
+submitBtn.addEventListener("click", checkGuess);
+
+
+resetBtn.addEventListener("click", resetGame);
+
+function checkGuess() {
+
+    let userGuess = Number(guessInput.value);
 
    
-    while (userGuess !== sec_num && attempts < 5) {
+    if (guessInput.value.trim() === "") {
+        message.textContent = "⚠️ Please enter a number!";
+        return;
+    }
 
-        userGuess = Number(prompt("Enter your guess (1-100):"));
-
-        
-        if (isNaN(userGuess)) {
-            alert("⚠️ Please enter a valid number!");
-            continue;
-        }
-
-        attempts++;
-
-      
-        if (userGuess > sec_num) {
-            alert("📉 Too High!");
-        }
-        else if (userGuess < sec_num) {
-            alert("📈 Too Low!");
-        }
-
-       
-        if (previousGuess !== null && userGuess !== sec_num) {
-
-            let currentDistance = Math.abs(userGuess - sec_num);
-            let previousDistance = Math.abs(previousGuess - sec_num);
-
-            if (currentDistance < previousDistance) {
-                alert("🔥 Getting Warmer!");
-            }
-            else if (currentDistance > previousDistance) {
-                alert("❄️ Getting Colder!");
-            }
-            else {
-                alert("😐 Same distance as previous guess.");
-            }
-        }
-
-       
-        previousGuess = userGuess;
+   
+    if (isNaN(userGuess)) {
+        message.textContent = "⚠️ Invalid input!";
+        return;
     }
 
     
-    if (userGuess === sec_num) {
+    if (userGuess < 1 || userGuess > 100) {
+        message.textContent = "⚠️ Enter number between 1 and 100!";
+        return;
+    }
 
-        alert("🎉 Congratulations! You guessed correctly in " + attempts + " attempts.");
+    attempts++;
+    attemptCount.textContent = attempts;
+
+   
+    if (userGuess > secretNumber) {
+        message.textContent = "📉 Too High!";
+    }
+
+    
+    else if (userGuess < secretNumber) {
+        message.textContent = "📈 Too Low!";
+    }
+
+  
+    else {
+
+        message.textContent =
+            `🎉 Correct! You guessed in ${attempts} attempts!`;
 
        
         if (attempts < bestScore) {
 
             bestScore = attempts;
 
-            alert("🏆 New High Score: " + bestScore + " attempts!");
-        }
-        else {
-
-            alert("🏆 Current High Score: " + bestScore + " attempts.");
+            message.textContent +=
+                ` 🏆 New High Score: ${bestScore}`;
         }
 
+        endGame();
+        return;
     }
-    else {
 
-        alert("💥 Game Over! You used all 5 attempts.");
-        alert("✅ The correct number was: " + sec_num);
+   
+    if (previousGuess !== null) {
 
-       
-        let playAgain = confirm("Do you want to play again?");
+        let currentDistance =
+            Math.abs(userGuess - secretNumber);
 
-        if (playAgain) {
-            startGame();
+        let previousDistance =
+            Math.abs(previousGuess - secretNumber);
+
+        if (currentDistance < previousDistance) {
+            message.textContent += " 🔥 Getting Warmer!";
         }
+
+        else if (currentDistance > previousDistance) {
+            message.textContent += " ❄️ Getting Colder!";
+        }
+
         else {
-            alert("👋 Thanks for playing!");
+            message.textContent += " 😐 Same distance.";
         }
     }
+
+    previousGuess = userGuess;
+
+  
+    if (attempts >= 10) {
+
+        message.textContent =
+            `💥 Game Over! Number was ${secretNumber}`;
+
+        endGame();
+    }
+
+    
+    guessInput.value = "";
 }
 
 
-startGame();
+
+function endGame() {
+
+    guessInput.disabled = true;
+    submitBtn.disabled = true;
+
+    resetBtn.classList.remove("hidden");
+}
+
+
+
+function resetGame() {
+
+    secretNumber = Math.floor(Math.random() * 100) + 1;
+
+    attempts = 0;
+    previousGuess = null;
+
+    attemptCount.textContent = "0";
+
+    message.textContent = "Good Luck!";
+
+    guessInput.disabled = false;
+    submitBtn.disabled = false;
+
+    guessInput.value = "";
+
+    resetBtn.classList.add("hidden");
+}
