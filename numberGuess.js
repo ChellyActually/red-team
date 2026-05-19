@@ -124,7 +124,7 @@ function endGame() {
     resetBtn.classList.remove("hidden");
 }
 
-
+// Hello, Aishu
 
 function resetGame() {
 
