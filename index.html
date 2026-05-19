@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕹️ Multi-Feature Arcade</title>
+    <!-- Links Member 1's File -->
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <div class="arcade-dashboard">
+        
+        <!-- WIDGET 1: GUESSING GAME (Member 2's Territory) -->
+        <div class="card game-card">
+            <h2>🎯 Guess The Number</h2>
+            <p class="instructions">I am thinking of a number between 1 and 100.</p>
+            
+            <div class="input-area">
+                <input type="number" id="guessInput" min="1" max="100" placeholder="1-100">
+                <button id="submitBtn">Guess</button>
+            </div>
+
+            <p id="message" class="feedback-msg">Good Luck!</p>
+            <p class="tracker">Attempts: <span id="attemptCount">0</span></p>
+            <button id="resetBtn" class="hidden">Play Again 🔄</button>
+        </div>
+
+        <!-- WIDGET 2: LOOP COUNTER (Member 3's Territory) -->
+        <div class="card counter-card">
+            <h2>🔄 Loop Counter (0-10)</h2>
+            <p class="instructions">Click to increase the number. It resets automatically after 10!</p>
+            
+            <div class="counter-box">
+                <span id="counterDisplay">0</span>
+            </div>
+            
+            <button id="counterBtn">Click Me!</button>
+        </div>
+
+    </div>
+
+    <!-- Scripts connected from Members 2 & 3 -->
+    <script src="numberGuess.js"></script>
+    <script src="Counter.js"></script>
+</body>
+</html>
