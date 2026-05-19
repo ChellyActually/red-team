@@ -1,0 +1,230 @@
+/* Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* Libre baskervile */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --bg: #0b0f14;
+    --text: #e5e7eb;
+    --primary: #f86363;
+    --muted: #94a3b8;
+    --surface: #111827;
+    --border: #942b2f;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 4rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: poppins;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    margin: var(--space-10);
+}
+
+.gallery {
+    display: grid;
+    gap: 12px;
+    
+    width: 340px;
+    height: 340px;
+    
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    
+    grid-template-areas: 
+    "a a a"
+    "c c b"
+    "c c b";
+
+    animation: right 1.2s ease;
+}
+
+@keyframes right {
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.gal-item {
+    background-color: #94a3b8;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.gal-item:nth-child(1){
+    background: linear-gradient(to left, #ff416c, #ff4b2b);
+}
+.gal-item:nth-child(2){
+    background: linear-gradient(to top, #ff416c, #fc7057);
+}
+.gal-item:nth-child(3){
+    background: linear-gradient(to right, #ff2d61, #fc8857);
+}
+
+.gal-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.title-container {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    animation: left 1.2s ease;
+}
+
+@keyframes left {
+    from{
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.title-container>p , .title-container>h3{
+    font-family: "Libre Baskerville";
+}
+
+.title-container>h1 {
+    line-height: 1;
+}
+
+.red {
+    color: var(--primary);
+}
+
+.hero {
+    height: 93vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-8) 4rem;
+}
+
+
+@media (max-width: 800px) {
+    .hero {
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--space-10);
+    }
+
+    .title-container {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.arcade-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40vh;
+    margin-bottom: 200px;
+}
+
+.card {
+    border: var(--border) 4px solid;
+    border-radius: var(--space-6);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    width: 80%;
+    animation: scrollup linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 50%;
+}
+
+@keyframes scrollup {
+    from{
+        opacity: 0;
+        scale: 0.5;
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+.instructions {
+    margin: var(--space-8) 0px;
+}
+
+#resetBtn {
+    margin-top: var(--space-8);
+}
+
+button {
+    padding: var(--space-2) var(--space-6);
+    font-weight: bold;
+    color: var(--text);
+    background-color: var(--surface);
+    border: solid 2px var(--primary);
+    border-radius: var(--space-1);
+    font-size: large;
+    transition: all 0.2s ease;
+}
+
+#counterDisplay {
+    font-weight: bolder;
+    font-size: var(--space-10);
+}
+
+#counterBtn {
+    margin-top: var(--space-4);
+}
+
+#guessInput {
+    padding: var(--space-2);
+    font-weight: bold;
+    color: var(--text);
+    background-color: var(--surface);
+    border: solid 2px var(--primary);
+    border-radius: var(--space-1);
+    font-size: large;
+    text-align: center;
+    outline: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
+
+button:hover {
+    background-color: var(--border);
+}
+
+button:active {
+    transform: scale(0.85);
+}
+
+.input-area{
+    display: flex;
+    gap: var(--space-6);
+}
